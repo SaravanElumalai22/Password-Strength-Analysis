@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+        color: white;
+        padding: 40px 0;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 40px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* Password box */
+    .password-box {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        text-align: center;
+        word-break: break-all;
+        font-size: 25px;
+    }
+
+    .progress-bar {
+        width: 40%;
+        height: 28px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .progress {
+        height: 100%;
+        width: {{ score }}%;
+        transition: width 0.5s ease-in-out;
+        border-radius: 20px;
+    }
+
+    .weak { background: #ff4e4e; }
+    .medium { background: #ffa500; }
+    .strong { background: #00c853; }
+
+    /* FULL WIDTH DESCRIPTION WITH SIDE SPACING */
+    .result-text {
+        width: 100%;
+        padding: 35px 60px;   /* left & right spacing */
+
+        font-size: 18px;      /* increased font size */
+        line-height: 2;
+
+        background: rgba(0,0,0,0.15);
+        border-radius: 12px;
+
+        text-align: justify;
+    }
+
+    .result-text p {
+        margin-bottom: 18px;
+    }
+
+    .result-text strong {
+        color: #ffd369;
+        font-weight: 600;
+    }
+
+    .buttons {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .score-box {
+        width: fit-content;
+        margin: 20px auto 30px auto; 
+
+        padding: 12px 28px;
+
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 1px;
+
+        color: #fff;
+
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+
+        border-radius: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+        text-align: center;
+    }
+    a {
+        display: inline-block;
+        padding: 12px 22px;
+        background: #ff7eb3;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s ease;
+        margin: 5px;
+    }
+
+    a:hover {
+        background: #ff4e8a;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        body {
+            padding: 20px 0;
+        }
+
+        .container {
+            padding: 0 15px;
+        }
+
+        .result-text {
+            padding: 25px 20px;
+            font-size: 16px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🔍 Password Analysis Result</h1>
+
+    <h2><div class="password-box">
+        Password: {{ password }}
+    </div></h2>
+
+    <div class="progress-bar">
+        <div class="progress 
+            {% if score < 40 %}
+                weak
+            {% elif score < 70 %}
+                medium
+            {% else %}
+                strong
+            {% endif %}
+        ">
+        </div>
+    </div>
+
+    <div class="score-box">
+       Strength Score: {{ score }} / 100
+    </div>
+    
+
+    
+
+</div>
+
+<!-- FULL WIDTH DESCRIPTION -->
+<div class="result-text">
+    {{ result|linebreaks }}
+</div>
+
+<div class="container">
+    <div class="buttons">
+        <a href="{% url 'detect' %}">🔁 Try Again</a>
+        <a href="{% url 'users-home' %}">Go back to Home</a>
+    </div>
+</div>
+
+</body>
+</html>

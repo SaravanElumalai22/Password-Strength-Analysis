@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5") no-repeat center center fixed;
+    background-size: cover;
+    padding: 40px 20px;
+    color: #fff;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Glass card */
+#login_form {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Sections */
+.form-section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #ffd369;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00e0ff;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(45deg, #ff7eb3, #ff4e8a);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #00e0ff, #0072ff);
+}
+
+/* Link */
+.text-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text-center a {
+    color: #ffd369;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>✨ Create Account</h2>
+
+    <div id="login_form">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-section">
+                <label>First Name</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="form-section">
+                <label>Last Name</label>
+                {{ form.last_name }}
+            </div>
+
+            <div class="form-section">
+                <label>Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-section">
+                <label>Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-section">
+                <label>Password</label>
+                {{ form.password1 }}
+            </div>
+
+            <div class="form-section">
+                <label>Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'login' %}">Already have an account?</a><br>
+        <a href="{% url 'users-home' %}">Go back to Home</a>
+    </div>
+</div>
+
+</body>
+</html>

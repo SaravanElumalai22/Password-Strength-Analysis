@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Saved Results</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5") no-repeat center center fixed;
+            background-size: cover;
+            padding: 40px 20px;
+            color: #fff;
+            position: relative;
+        }
+
+        /* 🌙 overlay for better contrast */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            z-index: -1;
+        }
+
+        /* 🧭 header with button */
+        .header {
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-weight: 600;
+        }
+
+        /* 🔙 minimal back button */
+        .back-btn {
+            font-size: 13px;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            color: #ffd369;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* 🧊 lighter glass card */
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff7eb3;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .card p {
+            margin-bottom: 10px;
+        }
+
+        .card strong {
+            color: #ffd369;
+        }
+
+        /* score colors */
+        .low { color: #ff4e4e; }
+        .mid { color: #ffa500; }
+        .high { color: #00e676; }
+
+        small {
+            display: block;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        details {
+            margin-top: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        summary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* ✨ lighter description block */
+        .description {
+            margin-top: 15px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(6px);
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .empty {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>📊 Saved Password Analysis</h2>
+    <a href="{% url 'users-home' %}" class="back-btn">← Home</a>
+</div>
+
+<div class="wrapper">
+
+{% for item in data %}
+    <div class="card">
+
+        <p><strong>Password:</strong> {{ item.password }}</p>
+
+        <p>
+            <strong>Score:</strong>
+            <span class="
+                {% if item.score < 40 %}
+                    low
+                {% elif item.score < 70 %}
+                    mid
+                {% else %}
+                    high
+                {% endif %}
+            ">
+                {{ item.score }}
+            </span>
+        </p>
+
+        <details>
+            <summary>👁 View</summary>
+
+            <div class="description">
+                {{ item.description|linebreaks }}
+            </div>
+        </details>
+
+        <small>{{ item.created_at }}</small>
+
+    </div>
+{% empty %}
+    <p class="empty">No data yet.</p>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

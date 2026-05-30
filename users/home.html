@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Password Strength Checker</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5") no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+}
+
+/* OVERLAY */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(3px) saturate(70%);
+    z-index: -1;
+}
+
+/* SECTION */
+.section {
+    padding: 80px 0;
+}
+
+/* CARD */
+.custom-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 25px;
+    transition: 0.3s;
+}
+
+.custom-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* IMAGE */
+.section img {
+    border-radius: 12px;
+    width: 100%;
+    
+}
+
+/* TITLE */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    color: #ffc107;
+}
+
+/* BUTTON */
+.btn-main {
+    background: linear-gradient(45deg, #ffc107, #ff416c);
+    border: none;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+/* SCROLL */
+html {
+    scroll-behavior: smooth;
+}
+
+.info-text {
+    text-align: center;   
+    margin: 1px auto;    
+    max-width: 1600px;     
+    line-height: 1.5;
+}
+.col-md-8 img {
+    max-width: 100%;
+    height: auto;
+
+    margin-left: 230px;   
+    margin-top: 20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR (ONLY CHANGE HERE) ================= -->
+<header class="header-area header-sticky">
+<div class="container">
+<nav class="navbar navbar-expand-lg">
+
+<a class="navbar-brand text-white" href="#">Password Strength Checker</a>
+
+<button class="navbar-toggler bg-warning" data-bs-toggle="collapse" data-bs-target="#nav">
+☰
+</button>
+
+<div class="collapse navbar-collapse" id="nav">
+<ul class="navbar-nav ms-auto">
+
+{% if user.is_authenticated %}
+
+<!-- ALL BUTTONS -->
+<li class="nav-item">
+<a class="nav-link text-white" href="{% url 'users-home' %}">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link text-white" href="{% url 'detect' %}">Prediction</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link text-white" href="{% url 'users-profile' %}">Profile</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link text-white" href="{% url 'detect_db' %}">History</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link text-white" href="{% url 'logout_view' %}">Logout</a>
+</li>
+
+{% else %}
+
+<!-- ONLY REGISTER -->
+<li class="nav-item">
+<a class="nav-link text-white" href="{% url 'users-register' %}">Register</a>
+</li>
+
+{% endif %}
+
+</ul>
+</div>
+
+</nav>
+</div>
+</header>
+
+
+<!-- ================= HERO (UNCHANGED EXACTLY) ================= -->
+<section class="section text-center">
+<div class="container">
+
+<h1>Password Security <span style="color:#ffc107;">Analyzer</span></h1>
+
+<p class="mt-3">
+Check your password strength and stay safe from cyber attacks.
+</p>
+
+{% if user.is_authenticated %}
+<a href="{% url 'detect' %}" class="btn btn-main mt-3">Analyze Password</a>
+{% else %}
+<a href="{% url 'users-register' %}" class="btn btn-main mt-3">Register</a><br>
+<a href="{% url 'login' %}" style="display:inline-block; margin-top:10px; color:#ffc107; text-decoration:none;">
+Already have an account?
+</a>
+{% endif %}
+
+</div>
+</section>
+
+
+<!-- ================= REST UNTOUCHED ================= -->
+
+<section class="section">
+<div class="container">
+
+<div class="section-title">
+<h2>Why Password Strength Matters</h2>
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87" alt="">
+</div>
+
+<div class="col-md-6 d-flex align-items-center">
+<h2>
+Weak passwords can be hacked easily. Cyber attackers use smart tools to guess common passwords.
+A strong password helps protect your personal information, online accounts, and privacy.
+</h2>
+
+</div>
+
+</div><br><br>
+<h3>
+<ul>
+<li>Detect weak passwords instantly</li>
+<li>Show password strength score</li>
+<li>Give security suggestions</li>
+<li>Save analysis history securely</li>
+</ul></h3>
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+<div class="section-title">
+<h2>Common Cyber Attacks</h2>
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="custom-card">
+<img src="https://images.unsplash.com/photo-1563986768609-322da13575f3">
+<h4 class="mt-3">Phishing</h4>
+<p>Fake emails or websites steal your login details.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="custom-card">
+<img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b">
+<h4 class="mt-3">Malware</h4>
+<p>Harmful software can steal passwords and personal data.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="custom-card">
+<img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa">
+<h4 class="mt-3">Brute Force</h4>
+<p>Hackers try many password combinations to break accounts.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+<div class="section-title">
+<h2>How Our System Helps</h2>
+</div>
+
+<div class="row">
+
+<div class="col-md-6 d-flex align-items-center">
+
+</div>
+    <h4 class="info-text">
+    Our system uses Machine Learning and AI to analyze password security. It checks password patterns, predicts risks, and gives suggestions to create stronger passwords. 
+    </h4>
+<div class="col-md-8">
+<img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c">
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section class="section" style="background:#1c2541;">
+<div class="container text-center">
+
+<div class="section-title">
+<h2>Try It Now</h2>
+</div>
+
+<p>Test your password strength and stay safe online.</p>
+
+<a href="{% url 'detect' %}" class="btn btn-main mt-3">Start Checking</a>
+
+</div>
+</section>
+
+
+<footer class="text-center p-4" style="background:#0b132b;">
+<p>© 2026 Password Strength Checker | Cyber Awareness Project</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

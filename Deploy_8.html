@@ -1,0 +1,343 @@
+{% extends "users/base.html" %}
+{% block title %} Login Page {% endblock title%}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Deployment</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include your custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <style>
+       body {
+    background-color: #9f9090;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 30px;
+    font-size: 36px;
+    letter-spacing: 1px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.form-part {
+    flex: 1;
+    min-width: 380px;
+    margin: 15px;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.form-part:hover {
+    transform: translateY(-5px);
+}
+
+.form-part h3 {
+    text-align: center;
+    color: #212121;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+    font-size: 15px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #ff6f00;
+    box-shadow: 0 0 5px rgba(255, 111, 0, 0.5);
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff6f00, #ff8f00);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #e65100, #ff6f00);
+    transform: scale(1.03);
+}
+
+center {
+    margin-top: 25px;
+    color: #eee;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+    </style>
+</head>
+<body>
+    <h2>Network Threat Detections</h2>
+    <form action="{% url 'Deploy_8' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <!-- Part 1: First Side Inputs -->
+            <div class="form-part">
+                
+                <div class="form-group">
+                    <label for="flow_duration">Flow Duration:</label>
+                    <input type="text" id="flow_duration" name="flow_duration" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_tot">Forward Packets Total:</label>
+                    <input type="text" id="fwd_pkts_tot" name="fwd_pkts_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_tot">Backward Packets Total:</label>
+                    <input type="text" id="bwd_pkts_tot" name="bwd_pkts_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_data_pkts_tot">Forward Data Packets Total:</label>
+                    <input type="text" id="fwd_data_pkts_tot" name="fwd_data_pkts_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_data_pkts_tot">Backward Data Packets Total:</label>
+                    <input type="text" id="bwd_data_pkts_tot" name="bwd_data_pkts_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_per_sec">Forward Packets per Second:</label>
+                    <input type="text" id="fwd_pkts_per_sec" name="fwd_pkts_per_sec" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_per_sec">Backward Packets per Second:</label>
+                    <input type="text" id="bwd_pkts_per_sec" name="bwd_pkts_per_sec" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_pkts_per_sec">Flow Packets per Second:</label>
+                    <input type="text" id="flow_pkts_per_sec" name="flow_pkts_per_sec" required>
+                </div>
+                <div class="form-group">
+                    <label for="down_up_ratio">Down/Up Ratio:</label>
+                    <input type="text" id="down_up_ratio" name="down_up_ratio" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_header_size_tot">Forward Header Size Total:</label>
+                    <input type="text" id="fwd_header_size_tot" name="fwd_header_size_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_header_size_min">Forward Header Size Minimum:</label>
+                    <input type="text" id="fwd_header_size_min" name="fwd_header_size_min" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_header_size_max">Forward Header Size Maximum:</label>
+                    <input type="text" id="fwd_header_size_max" name="fwd_header_size_max" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_header_size_tot">Backward Header Size Total:</label>
+                    <input type="text" id="bwd_header_size_tot" name="bwd_header_size_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_header_size_min">Backward Header Size Minimum:</label>
+                    <input type="text" id="bwd_header_size_min" name="bwd_header_size_min" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_header_size_max">Backward Header Size Maximum:</label>
+                    <input type="text" id="bwd_header_size_max" name="bwd_header_size_max" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_FIN_flag_count">Flow FIN Flag Count:</label>
+                    <input type="text" id="flow_FIN_flag_count" name="flow_FIN_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_SYN_flag_count">Flow SYN Flag Count:</label>
+                    <input type="text" id="flow_SYN_flag_count" name="flow_SYN_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_RST_flag_count">Flow RST Flag Count:</label>
+                    <input type="text" id="flow_RST_flag_count" name="flow_RST_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_PSH_flag_count">Forward PSH Flag Count:</label>
+                    <input type="text" id="fwd_PSH_flag_count" name="fwd_PSH_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_PSH_flag_count">Backward PSH Flag Count:</label>
+                    <input type="text" id="bwd_PSH_flag_count" name="bwd_PSH_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_ACK_flag_count">Flow ACK Flag Count:</label>
+                    <input type="text" id="flow_ACK_flag_count" name="flow_ACK_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_URG_flag_count">Forward URG Flag Count:</label>
+                    <input type="text" id="fwd_URG_flag_count" name="fwd_URG_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_URG_flag_count">Backward URG Flag Count:</label>
+                    <input type="text" id="bwd_URG_flag_count" name="bwd_URG_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_CWR_flag_count">Flow CWR Flag Count:</label>
+                    <input type="text" id="flow_CWR_flag_count" name="flow_CWR_flag_count" required>
+                </div>
+            </div>
+            <!-- Part 2: Second Side Inputs -->
+            <div class="form-part">
+                
+                
+                
+                
+                <div class="form-group">
+                    <label for="flow_ECE_flag_count">Flow ECE Flag Count:</label>
+                    <input type="text" id="flow_ECE_flag_count" name="flow_ECE_flag_count" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_payload_min">Forward Packets Payload Minimum:</label>
+                    <input type="text" id="fwd_pkts_payload_min" name="fwd_pkts_payload_min" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_payload_max">Forward Packets Payload Maximum:</label>
+                    <input type="text" id="fwd_pkts_payload_max" name="fwd_pkts_payload_max" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_payload_tot">Forward Packets Payload Total:</label>
+                    <input type="text" id="fwd_pkts_payload_tot" name="fwd_pkts_payload_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_payload_avg">Forward Packets Payload Average:</label>
+                    <input type="text" id="fwd_pkts_payload_avg" name="fwd_pkts_payload_avg" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_pkts_payload_std">Forward Packets Payload Standard Deviation:</label>
+                    <input type="text" id="fwd_pkts_payload_std" name="fwd_pkts_payload_std" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_payload_min">Backward Packets Payload Minimum:</label>
+                    <input type="text" id="bwd_pkts_payload_min" name="bwd_pkts_payload_min" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_payload_max">Backward Packets Payload Maximum:</label>
+                    <input type="text" id="bwd_pkts_payload_max" name="bwd_pkts_payload_max" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_payload_tot">Backward Packets Payload Total:</label>
+                    <input type="text" id="bwd_pkts_payload_tot" name="bwd_pkts_payload_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_payload_avg">Backward Packets Payload Average:</label>
+                    <input type="text" id="bwd_pkts_payload_avg" name="bwd_pkts_payload_avg" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_pkts_payload_std">Backward Packets Payload Standard Deviation:</label>
+                    <input type="text" id="bwd_pkts_payload_std" name="bwd_pkts_payload_std" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_pkts_payload_min">Flow Packets Payload Minimum:</label>
+                    <input type="text" id="flow_pkts_payload_min" name="flow_pkts_payload_min" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_pkts_payload_max">Flow Packets Payload Maximum:</label>
+                    <input type="text" id="flow_pkts_payload_max" name="flow_pkts_payload_max" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_pkts_payload_tot">Flow Packets Payload Total:</label>
+                    <input type="text" id="flow_pkts_payload_tot" name="flow_pkts_payload_tot" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_pkts_payload_avg">Flow Packets Payload Average:</label>
+                    <input type="text" id="flow_pkts_payload_avg" name="flow_pkts_payload_avg" required>
+                </div>
+                <div class="form-group">
+                    <label for="flow_pkts_payload_std">Flow Packets Payload Standard Deviation:</label>
+                    <input type="text" id="flow_pkts_payload_std" name="flow_pkts_payload_std" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_bulk_packets">Forward Bulk Packets:</label>
+                    <input type="text" id="fwd_bulk_packets" name="fwd_bulk_packets" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_bulk_packets">Backward Bulk Packets:</label>
+                    <input type="text" id="bwd_bulk_packets" name="bwd_bulk_packets" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_bulk_rate">Forward Bulk Rate:</label>
+                    <input type="text" id="fwd_bulk_rate" name="fwd_bulk_rate" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_bulk_rate">Backward Bulk Rate:</label>
+                    <input type="text" id="bwd_bulk_rate" name="bwd_bulk_rate" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_init_window_size">Forward Initial Window Size:</label>
+                    <input type="text" id="fwd_init_window_size" name="fwd_init_window_size" required>
+                </div>
+                <div class="form-group">
+                    <label for="bwd_init_window_size">Backward Initial Window Size:</label>
+                    <input type="text" id="bwd_init_window_size" name="bwd_init_window_size" required>
+                </div>
+                <div class="form-group">
+                    <label for="fwd_last_window_size">Forward Last Window Size:</label>
+                    <input type="text" id="fwd_last_window_size" name="fwd_last_window_size" required>
+                </div>
+            </div>
+        </div>
+        <center>
+            <button type="submit">Predict</button>
+            <h1 style="font-size: 18px;">{{ prediction_text }}</h1>
+        </center>
+    </form>
+</body>
+
+</html>
+{% endblock content %}

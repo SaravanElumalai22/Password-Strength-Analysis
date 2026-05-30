@@ -1,0 +1,172 @@
+{% extends "users/base.html" %}
+{% block title %}Profile Page{% endblock title %}
+
+{% block content %}
+
+<style>
+
+/* 🌈 Full-page background (FIXED) */
+body {
+    background: url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5") no-repeat center center fixed !important;
+    background-size: cover !important;
+}
+
+/* 🎯 Dark overlay for better readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(3px);
+
+    z-index: -1;
+}
+
+/* 🧊 Glass Card */
+.card {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(255,255,255,0.12) !important;
+    backdrop-filter: blur(15px);
+    border-radius: 20px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+    padding: 30px !important;
+    color: #fff;
+}
+
+/* 👤 Profile image */
+.card img {
+    border: 4px solid #ffd369 !important;
+    transition: 0.3s;
+}
+
+.card img:hover {
+    transform: scale(1.05);
+}
+
+/* 🧾 Labels */
+.form-label {
+    color: #ffd369 !important;
+    font-weight: 600;
+}
+
+/* 🧠 Inputs */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00e0ff;
+}
+
+/* 🔘 Buttons */
+.btn-primary, .btn-secondary {
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff7eb3, #ff4e8a) !important;
+    transition: 0.3s;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background: linear-gradient(45deg, #00e0ff, #0072ff) !important;
+    transform: translateY(-2px);
+}
+
+/* 🔗 Change password button */
+.btn-outline-primary {
+    border-radius: 10px !important;
+    background: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(45deg, #00e0ff, #0072ff) !important;
+}
+
+/* ⚠️ Error */
+.alert {
+    background: rgba(255,0,0,0.2) !important;
+    border-radius: 10px;
+    color: #fff;
+}
+
+/* Username text */
+h3 {
+    color: #fff;
+    margin-top: 10px;
+}
+
+</style>
+
+<div class="container-fluid py-5">
+    <div class="container my-5">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+
+            <div class="text-center mb-4">
+                <img src="{{ user.profile.avatar.url }}" 
+                     class="rounded-circle shadow"
+                     alt="Profile Picture"
+                     style="width: 140px; height: 140px; object-fit: cover; cursor: pointer;">
+                <h3 class="mt-3">{{ user.username }}</h3>
+            </div>
+
+            {% if user_form.errors %}
+            <div class="alert">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong><br>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Username:</label>
+                    {{ user_form.username }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email:</label>
+                    {{ user_form.email }}
+                </div>
+
+                <div class="mb-4">
+                    <a href="{% url 'password_change' %}" class="btn btn-outline-primary w-100">
+                        🔒 Change Password
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Change Avatar:</label>
+                    {{ profile_form.avatar }}
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Bio:</label>
+                    {{ profile_form.bio }}
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary btn-lg px-4">💾 Save</button>
+                    <button type="reset" class="btn btn-secondary btn-lg px-4">↺ Reset</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

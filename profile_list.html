@@ -1,0 +1,121 @@
+{% extends "users/base.html" %}
+{% block title %}Profile List{% endblock title %}
+
+{% block content %}
+
+<style>
+/* 🌈 Background */
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Wrapper */
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+/* 🧊 Glass Table */
+.table {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Header */
+.table thead {
+    background: rgba(0,0,0,0.3);
+}
+
+.table th {
+    color: #ffd369;
+    text-align: center;
+    padding: 12px;
+}
+
+/* Rows */
+.table td {
+    text-align: center;
+    padding: 12px;
+    vertical-align: middle;
+}
+
+/* Alternate row */
+.table-striped tbody tr:nth-child(odd) {
+    background: rgba(255,255,255,0.05);
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+    background: rgba(0,0,0,0.25);
+    transition: 0.3s;
+}
+
+/* Avatar */
+.table img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffd369;
+    transition: 0.3s;
+}
+
+.table img:hover {
+    transform: scale(1.1);
+}
+
+/* Empty row */
+.table td[colspan] {
+    text-align: center;
+    font-style: italic;
+    color: #ddd;
+}
+</style>
+
+<div class="container my-5">
+
+    <h2>👥 Profile List</h2>
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Avatar</th>
+                <th>Bio</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for profile in profiles %}
+                <tr>
+                    <td>{{ profile.user.username }}</td>
+                    <td>{{ profile.user.email }}</td>
+                    <td>
+                        <img src="{{ profile.avatar.url }}" alt="Avatar">
+                    </td>
+                    <td>{{ profile.bio }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No profiles found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock content %}

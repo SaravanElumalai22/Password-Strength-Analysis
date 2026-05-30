@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Threats and Prevention</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 40px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .btn-home {
+            background-color: #007bff;
+            color: #fff;
+            margin-bottom: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .btn-home:hover {
+            background-color: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{% url 'users-home' %}" class="btn-home">
+            Home
+        </a>
+
+        <h1>Security Threats and Prevention</h1>
+
+        {% if result == 'ARP_poisioning' %}
+        <h2>🔗 ARP Poisoning</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>ARP Poisoning involves an attacker sending falsified ARP messages to a local network, linking their MAC address to an IP address of a legitimate device.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Network traffic may be intercepted, data can be stolen, and connections might be rerouted.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Vulnerable network configurations, lack of encryption, and insufficient monitoring.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Implement packet filtering, use static ARP entries, and regularly monitor network traffic.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Educate users on secure network practices and deploy ARP spoofing detection tools.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'DDOS_Slowloris' %}
+        <h2>💥 DDoS Slowloris</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>The Slowloris attack is a type of Denial of Service (DoS) attack that sends incomplete HTTP requests to exhaust server resources.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Server slows down or crashes, legitimate users experience delays or service interruptions.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Exploits vulnerabilities in the HTTP protocol, lack of proper server configuration.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Implement timeouts on HTTP connections, use load balancers, and monitor server traffic.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Deploy a Web Application Firewall (WAF) and keep server software updated.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'DOS_SYN_Hping' %}
+        <h2>⚡ DoS SYN Hping</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>SYN Flood is a type of DoS attack that overwhelms a server with SYN packets, causing it to become unresponsive.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Server becomes unresponsive, legitimate users are unable to access services.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Exploitation of the TCP handshake process, lack of SYN flood protection.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Configure SYN cookies, limit connection rates, and use intrusion prevention systems (IPS).</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Monitor network traffic for unusual patterns and employ redundancy in network architecture.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'Metasploit_Brute_Force_SSH' %}
+        <h2>🔓 Metasploit Brute Force SSH</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>Brute force attack using Metasploit to gain unauthorized access to SSH by systematically trying various password combinations.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Multiple failed login attempts, potential unauthorized access to systems.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Weak or default passwords, lack of account lockout policies.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Use strong, unique passwords, implement two-factor authentication, and limit SSH access.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Monitor for unusual login activity and regularly update security protocols.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'MQTT_Publish' %}
+        <h2>📡 MQTT Publish</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>MQTT Publish attack involves sending unauthorized messages to an MQTT broker, potentially leading to data manipulation or network disruption.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Unexpected messages in the network, disrupted IoT device functionality.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Weak authentication, unsecured MQTT broker configurations.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Implement strong authentication, encrypt MQTT traffic, and secure broker access.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Regularly audit MQTT configurations and monitor for unauthorized access.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'NMAP_FIN_SCAN' %}
+        <h2>🔍 NMAP FIN Scan</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>NMAP FIN Scan sends packets with a FIN flag to check open ports without establishing a full TCP connection.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Stealthy scanning activity, potential reconnaissance by attackers.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Exploitation of TCP/IP stack vulnerabilities, lack of network monitoring.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Use intrusion detection systems (IDS), block suspicious IP addresses, and monitor network activity.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Regularly audit network security configurations and educate staff on security awareness.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'NMAP_OS_DETECTION' %}
+        <h2>🖥️ NMAP OS Detection</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>NMAP OS Detection is used by attackers to identify the operating system of devices on a network, aiding in targeted attacks.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Increased network scanning activity, potential profiling of devices.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Lack of firewall rules, insufficient network segmentation.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Implement strict firewall rules, use network segmentation, and hide system details.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Regularly monitor network traffic and employ network intrusion detection systems.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'NMAP_TCP_scan' %}
+        <h2>🔍 NMAP TCP Scan</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>NMAP TCP Scan is a common method for scanning open ports on a network to identify potential vulnerabilities.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Unusual network traffic, potential identification of open ports.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Vulnerable network services, lack of port security.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Limit open ports, use firewalls to block unauthorized scans, and monitor network traffic.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Employ port-knocking techniques and regularly audit network configurations.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'NMAP_UDP_SCAN' %}
+        <h2>🔍 NMAP UDP Scan</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>NMAP UDP Scan checks for open UDP ports, which are often overlooked but can be vulnerable to attacks.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Unusual UDP traffic, identification of vulnerable services.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Misconfigured UDP services, lack of proper monitoring.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Restrict UDP traffic, implement firewalls, and use logging to monitor UDP activities.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Regularly audit UDP services and update security patches.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'NMAP_XMAS_TREE_SCAN' %}
+        <h2>🎄 NMAP Xmas Tree Scan</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>The Xmas Tree Scan sends packets with all TCP flags set, attempting to gather information on open ports and network responses.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">⚠️</span>Symptoms</td>
+                    <td>Stealthy network probing, potential identification of open and closed ports.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚨</span>Causes</td>
+                    <td>Exploit of TCP stack behavior, lack of network intrusion detection.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛡️</span>Prevention</td>
+                    <td>Use intrusion prevention systems (IPS), configure firewalls to block suspicious packets, and monitor network logs.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🚧</span>Precaution</td>
+                    <td>Regularly audit network security policies and train staff on security awareness.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'Thing_Speak' %}
+        <h2>✅ Normal Network Activity</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">💡</span>Description</td>
+                    <td>ThingSpeak is an IoT analytics platform service that allows you to aggregate, visualize, and analyze live data streams in the cloud. You can send data to ThingSpeak from your devices, create instant visualization of live data, and send alerts.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🛠️</span>Maintenance</td>
+                    <td>Regularly monitor network traffic, update security software, and perform routine checks to ensure stability.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🔍</span>Inspection</td>
+                    <td>ThingSpeak™ is an IoT analytics platform service that allows you to aggregate, visualize and analyze live data streams in the cloud. ThingSpeak provides instant visualizations of data posted by your devices to ThingSpeak.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% elif result == 'Wipro_bulb' %}
+        <h1>💡 Wipro Bulb Network Status</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="emoji">❓</span>Description</td>
+                    <td>A normal connection to a Wipro smart bulb, indicating proper device operation and network connectivity.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🔄</span>Operation</td>
+                    <td>Verify proper functionality, ensure firmware is up-to-date, and check for stable connectivity.</td>
+                </tr>
+                <tr>
+                    <td><span class="emoji">🔒</span>Security</td>
+                    <td>Ensure device passwords are strong, network access is secure, and firmware updates are applied regularly.</td>
+                </tr>
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+
+</html>
